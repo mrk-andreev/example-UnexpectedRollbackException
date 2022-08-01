@@ -1,0 +1,28 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    lazy-initialization: false
+    banner-mode: off
+  datasource:
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 60000
+      maximum-pool-size: ${DB_POOL_SIZE:5}
+      max-lifetime: 60000
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:${DBMS:postgresql}://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    show-sql: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: false
+        jdbc:
+          lob:
+            non_contextual_creation: false
+        default_schema: ${DB_SCHEMA:public}
+    open-in-view: false
